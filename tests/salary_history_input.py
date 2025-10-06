@@ -81,7 +81,7 @@ def test_add_salary_history(page):
 
                 if pay_rates == 'Salary':
                     salary_history_page.click(salary_history_page.SALARY)
-                if pay_rates == 'Hourly':
+                if pay_rates == 'Hourly Pay':
                     salary_history_page.click(salary_history_page.HOURLY_PAY)
 
                 if zero_hour.lower() == 'yes':
@@ -94,10 +94,14 @@ def test_add_salary_history(page):
                         if pay_frequency != 'Annum': # if it is annum you don't have to do anything as it is already selected
                             if pay_frequency == 'Month':
                                 page.get_by_role("option", name="Month").locator("div").click()
-                            elif pay_frequency == 'Fortnight':
+                            if pay_frequency == 'Fortnight':
                                 page.get_by_role("option", name="Fortnight").locator("div").click()
-                            elif pay_frequency == 'Day':
+                            if pay_frequency == 'Day':
                                 page.get_by_role("option", name="Day").locator("div").click()
+
+                if pay_rates == 'Hourly Pay':
+                    salary_history_page.click(salary_history_page.EFFECTIVE_PAY_RATE)
+                    salary_history_page.fill(salary_history_page.EFFECTIVE_PAY_RATE, effective_pay_rate)
 
                 else:
                     salary_history_page.click(salary_history_page.ACTUAL_WEEKLY_HOURS)
@@ -111,10 +115,12 @@ def test_add_salary_history(page):
                         if pay_frequency_2 != 'Annum':  # if it is annum you don't have to do anything as it is already selected
                             if pay_frequency_2 == 'Month':
                                 page.get_by_role("option", name="Month").locator("div").click()
-                            elif pay_frequency_2 == 'Fortnight':
+                            if pay_frequency_2 == 'Fortnight':
                                 page.get_by_role("option", name="Fortnight").locator("div").click()
-                            elif pay_frequency_2 == 'Day':
+                            if pay_frequency_2 == 'Day':
                                 page.get_by_role("option", name="Day").locator("div").click()
+                                salary_history_page.click(salary_history_page.ACTUAL_DAYS_PER_WEEK)
+                                salary_history_page.fill(salary_history_page.ACTUAL_DAYS_PER_WEEK, actual_weekly_hours)
 
                 if str(paid_irregularly).strip().lower() == 'yes':
                     salary_history_page.click(salary_history_page.PAID_IRREGULARLY)

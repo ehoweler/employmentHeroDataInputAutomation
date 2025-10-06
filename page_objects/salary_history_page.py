@@ -20,6 +20,7 @@ class SalaryHistory(BasePage):
     PAY_FREQUENCY_2_FORTNIGHT = "//input[@aria-activedescendant='downshift-:rd:-item-1']"
     PAY_FREQUENCY_2_DAY = "//input[@aria-activedescendant='downshift-:rd:-item-1']"
     ACTUAL_WEEKLY_HOURS = "//input[@name='hours_per_week']"
+    ACTUAL_DAYS_PER_WEEK = "//input[@name='days_per_week']"
     FTE_WEEKLY_HOURS = "//input[@name='full_time_equivalent_units']"
     EFFECTIVE_PAY_RATE = "//input[@name='effective_salary']"
     PAID_IRREGULARLY = "//input[@name='employee_paid_irregularly']/following-sibling::span"
