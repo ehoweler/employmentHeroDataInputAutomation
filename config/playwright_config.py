@@ -14,3 +14,4 @@ class PlaywrightConfig:
     HOMEPAGE_WELCOME_MESSAGE = "Welcome Elske"  # Expected welcome message after login
     EMPLOYMENT_SPREADSHEET_PATH = r"C:\Users\elske\PycharmProjects\employmentHeroDataInputAutomation\employment_history.xlsx"
     SALARY_SPREADSHEET_PATH = r"C:\Users\elske\PycharmProjects\employmentHeroDataInputAutomation\salary_history.xlsx"
+    CERTIFICATIONS_SPREADSHEET_PATH = r"C:\Users\elske\PycharmProjects\employmentHeroDataInputAutomation\certifications.xlsx"
