@@ -138,20 +138,21 @@ def test_add_certifications(page):
     failure_file_path, failure_count = process_certifications(certifications_data, spreadsheet_path)
     print(f"First run completed. Failures: {failure_count}")
 
-    # Re-run if there are failures
+    # Retry logic
+    for attempt in range(2):  # Retry up to 2 times
+        if failure_file_path:
+            print(f"Retrying the test with failed records (Attempt {attempt + 2})...")
+            failed_data = pd.read_excel(failure_file_path)
+            failure_file_path, failure_count = process_certifications(failed_data, failure_file_path)
+            print(f"Attempt {attempt + 2} completed. Failures: {failure_count}")
+        else:
+            break
+
+    # Save final failures if any
     if failure_file_path:
-        print("Re-running the test with failed records...")
-        failed_data = pd.read_excel(failure_file_path)
-        _, re_run_failures = process_certifications(failed_data, failure_file_path)
-        print(f"Re-run completed. Remaining failures: {re_run_failures}")
-
-    def option_certification_name_locator(self, option: str):
-        """Return the locator for the search result based on certification name."""
-        return new_page.locator(f"//td/a[text()='{option}']")
-
-    def search_certification(self, certification_name: str):
-        """Search for an employee by name and press Enter."""
-        search_box = self.new_page.get_by_role("textbox", name="Search")
-        search_box.click()
-        search_box.fill(certification_name)
-        search_box.press("Enter")
+        final_failures_path = os.path.join(
+            os.path.dirname(spreadsheet_path),
+            f"final_failures_certifications_input_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        )
+        os.rename(failure_file_path, final_failures_path)
+        print(f"Final failures saved to {final_failures_path}")
